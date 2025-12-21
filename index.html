@@ -430,7 +430,7 @@
           }
         } else {
           group.scale.set(1, 1, 1);
-          group.rotation.y += (handRotY - group.rotation.y) * 0.05;
+          group.rotation.y += (handRotY - group.rotation.y) * 0.18;
         }
       }
 
@@ -438,7 +438,7 @@
         requestAnimationFrame(animate);
         const time = Date.now() * 0.001;
         const speed = 0.06;
-        const handRotY = (handX - 0.5) * 2.5;
+        const handRotY = (handX - 0.5) * 7.5;
 
         // Vandiep
         updateParticleGroup(groupGold, state, speed, handRotY, time, false);
