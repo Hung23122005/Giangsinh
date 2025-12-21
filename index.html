@@ -94,7 +94,7 @@
         top: 15px;
         right: 15px;
         width: 120px;
-        height: 90px;
+        height: 120px;
         border: 2px solid rgba(255, 0, 0, 0.5);
         transform: scaleX(-1);
         opacity: 0.6;
@@ -126,7 +126,7 @@
 
     <div id="canvas-container"></div>
     <video class="input_video" style="display: none"></video>
-    <canvas id="camera-preview"></canvas>
+    <canvas id="camera-preview" width="120" height="120"></canvas>
 
     <script>
       // ==========================================
@@ -539,8 +539,22 @@
         });
 
         hands.onResults((results) => {
-          ctx.clearRect(0, 0, 100, 75);
-          ctx.drawImage(results.image, 0, 0, 100, 75);
+          ctx.clearRect(0, 0, 120, 120);
+          
+          // Tính toán để crop center và fill canvas vuông
+          const videoWidth = results.image.width;
+          const videoHeight = results.image.height;
+          const canvasSize = 120;
+          
+          // Lấy kích thước nhỏ hơn để crop thành vuông
+          const size = Math.min(videoWidth, videoHeight);
+          
+          // Tính toán vị trí crop từ center
+          const sx = (videoWidth - size) / 2;
+          const sy = (videoHeight - size) / 2;
+          
+          // Vẽ phần crop lên canvas
+          ctx.drawImage(results.image, sx, sy, size, size, 0, 0, canvasSize, canvasSize);
 
           if (results.multiHandLandmarks.length > 0) {
             const lm = results.multiHandLandmarks[0];
