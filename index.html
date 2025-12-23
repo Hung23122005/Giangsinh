@@ -139,11 +139,11 @@
 
       const loader = new THREE.TextureLoader();
       const photoFiles = [
-        "./image11.jpeg",
-        "./image12.jpeg",
-        "./image13.jpeg",
-        "./image14.jpeg",
-        "./image15.jpeg",
+        "./image16.jpeg",
+        "./image17.jpeg",
+        "./image18.jpeg",
+        "./image19.jpeg",
+        "./image20.jpeg",
       ];
       const photoTextures = [];
       photoFiles.forEach((f, i) => (photoTextures[i] = loader.load(f)));
@@ -540,21 +540,31 @@
 
         hands.onResults((results) => {
           ctx.clearRect(0, 0, 120, 120);
-          
+
           // Tính toán để crop center và fill canvas vuông
           const videoWidth = results.image.width;
           const videoHeight = results.image.height;
           const canvasSize = 120;
-          
+
           // Lấy kích thước nhỏ hơn để crop thành vuông
           const size = Math.min(videoWidth, videoHeight);
-          
+
           // Tính toán vị trí crop từ center
           const sx = (videoWidth - size) / 2;
           const sy = (videoHeight - size) / 2;
-          
+
           // Vẽ phần crop lên canvas
-          ctx.drawImage(results.image, sx, sy, size, size, 0, 0, canvasSize, canvasSize);
+          ctx.drawImage(
+            results.image,
+            sx,
+            sy,
+            size,
+            size,
+            0,
+            0,
+            canvasSize,
+            canvasSize
+          );
 
           if (results.multiHandLandmarks.length > 0) {
             const lm = results.multiHandLandmarks[0];
